@@ -1,0 +1,60 @@
+<template>
+  <section class="slds-card" aria-labelledby="reading-list-heading">
+    <header class="slds-card__header">
+      <h1
+        id="reading-list-heading"
+        class="slds-card__header-title slds-text-heading_small"
+      >
+        {heading}
+      </h1>
+    </header>
+    <div class="slds-card__body slds-card__body_inner">
+      <template lwc:if={isLoading}>
+        <p role="status">Loading the reading list.</p>
+      </template>
+      <template lwc:else>
+        <template lwc:if={errorMessage}>
+          <p class="slds-text-color_error" role="alert">{errorMessage}</p>
+        </template>
+        <template lwc:if={hasBooks}>
+          <ul class="slds-has-dividers_around-space">
+            <template for:each={books} for:item="book">
+              <li key={book.bookId} class="slds-item slds-p-around_small">
+                <h2 class="slds-text-heading_small">{book.title}</h2>
+                <p class="slds-text-body_small">{book.authorName}</p>
+                <p>
+                  Status:
+                  <span data-book-status={book.bookId}>{book.status}</span>
+                </p>
+                <p>{book.progressLabel}</p>
+                <div
+                  class="slds-m-top_x-small"
+                  role="group"
+                  aria-label={book.statusGroupLabel}
+                >
+                  <template for:each={book.choices} for:item="choice">
+                    <button
+                      key={choice.value}
+                      type="button"
+                      class={choice.buttonClass}
+                      data-book-id={book.bookId}
+                      data-status={choice.value}
+                      aria-pressed={choice.pressed}
+                      disabled={book.isUpdating}
+                      onclick={handleStatusClick}
+                    >
+                      {choice.label}
+                    </button>
+                  </template>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </template>
+        <template lwc:elseif={showEmpty}>
+          <p>No books on this reading list yet.</p>
+        </template>
+      </template>
+    </div>
+  </section>
+</template>
