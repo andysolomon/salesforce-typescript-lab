@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    // Check the converted LWC only. Do not emit JavaScript and do not
+    // type-check existing .js files. The JSDoc example has its own config.
+    "allowJs": false,
+    "checkJs": false,
+    "noEmit": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM"],
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+    "experimentalDecorators": false,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "useDefineForClassFields": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "types": [],
+    "baseUrl": ".",
+    "paths": {
+      "@reading-lab/contracts": ["types/apex-contracts.ts"]
+    }
+  },
+  "include": ["force-app/main/default/lwc/**/*.ts", "types/**/*.ts"],
+  "exclude": ["**/__tests__/**", "examples", "node_modules"]
+}
